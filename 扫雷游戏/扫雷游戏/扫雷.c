@@ -55,34 +55,7 @@ void updatesweep(char sweep[MAX_ROW][MAX_COL],
 	}
 	
 	sweep[row][col] = count + '0';
-	printSweep(sweep);
 }
-
-char palyer(char sweep[MAX_ROW][MAX_COL], char mineSweep[MAX_ROW][MAX_COL]){
-	
-		int row = 0;
-		int col = 0;
-		while (1){
-		printf("请输入地皮的坐标(row col):");
-		scanf("%d %d", &row, &col);
-		if (row < 0 || row >= MAX_ROW || col < 0 || col >= MAX_COL){
-			printf("越界重输");
-			continue;
-		}
-		if (sweep[row][col] != '*'){
-			printf("翻开了重输入");
-			continue;
-		}
-		if (mineSweep[row][col] == '1'){
-			printf("游戏结束,你死了.\n");
-			printSweep(mineSweep);
-			break;
-			return '0';
-		}
-			updatesweep(sweep, mineSweep, row, col);
-	}
-}
-
 void game(){
 	srand((unsigned int)time(0));
 	int openedBlockCount = 0;
@@ -91,10 +64,24 @@ void game(){
 	init(sweep, mineSweep);
 	while (1){
 		printSweep(sweep);
-		palyer(sweep, mineSweep);
-		if (palyer(sweep, mineSweep) == '0'){
-			break;
-		}
+		int row = 0;
+		int col = 0;
+		printf("请输入地皮的坐标(row col):");
+		scanf("%d %d", &row, &col);
+		if (row < 0 || row >= MAX_ROW || col < 0 || col >= MAX_COL){
+				printf("越界重输");
+				continue;
+			}
+		if (sweep[row][col] != '*'){
+				printf("翻开了重输入");
+				continue;
+			}
+		if (mineSweep[row][col] == '1'){
+				printf("游戏结束,你死了.\n");
+				printSweep(mineSweep);
+				break;
+			}
+		updatesweep(sweep, mineSweep, row, col);
 		openedBlockCount++;
 		if (openedBlockCount == MAX_ROW * MAX_COL - DEGAULT_SWEEP) {
 			printf("游戏胜利!\n");
@@ -120,7 +107,6 @@ int main()
 		int choice = menu();
 		if (choice == 1){
 			game();
-			break;
 		}
 		else if (choice == 0){
 			printf("已退出,byebye!\n");
