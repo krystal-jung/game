@@ -34,7 +34,7 @@ void init(char show[MAX_ROW][MAX_COL], char mine[MAX_ROW][MAX_COL]){
 		n--;
 	}
 }
-void printShow(char show[MAX_ROW][MAX_COL]){
+void printMap(char themap[MAX_ROW][MAX_COL]){
 	printf("  |");
 	for (int col = 0; col < MAX_COL; col++) {
 		printf("%d ", col);
@@ -44,7 +44,7 @@ void printShow(char show[MAX_ROW][MAX_COL]){
 	for (int row = 0; row < MAX_ROW; row++) {
 		printf(" %d|", row);
 		for (int col = 0; col < MAX_COL; col++) {
-			printf("%c ", show[row][col]);
+			printf("%c ", themap[row][col]);
 		}
 		printf("\n");
 	}
@@ -75,12 +75,12 @@ void play(char show[MAX_ROW][MAX_COL], char mine[MAX_ROW][MAX_COL]){
 		if (row >= 0 && row < MAX_ROW&&col >= 0 && col < MAX_COL){
 			if (mine[row][col] == '1'){
 				printf("你已经被炸死了！！！\n");
-				printShow(mine);
+				printMap(mine);
 				break;
 			}
 			else{
 				updateShow(show, mine, row, col);
-				printShow(show);
+				printMap(show);
 				safe++;
 			}
 		}
@@ -98,7 +98,7 @@ void game(){
 	char show[MAX_ROW][MAX_COL] = { 0 };
 	char mine[MAX_ROW][MAX_COL] = { 0 };
 	init(show, mine);
-	printShow(show);
+	printMap(show);
 	play(show,mine);
 }
 int main()
