@@ -58,7 +58,7 @@ void updatesweep(char sweep[MAX_ROW][MAX_COL],
 	printSweep(sweep);
 }
 
-void palyer(char sweep[MAX_ROW][MAX_COL], char mineSweep[MAX_ROW][MAX_COL]){
+char palyer(char sweep[MAX_ROW][MAX_COL], char mineSweep[MAX_ROW][MAX_COL]){
 	
 		int row = 0;
 		int col = 0;
@@ -77,6 +77,7 @@ void palyer(char sweep[MAX_ROW][MAX_COL], char mineSweep[MAX_ROW][MAX_COL]){
 			printf("游戏结束,你死了.\n");
 			printSweep(mineSweep);
 			break;
+			return '0';
 		}
 			updatesweep(sweep, mineSweep, row, col);
 	}
@@ -91,6 +92,9 @@ void game(){
 	while (1){
 		printSweep(sweep);
 		palyer(sweep, mineSweep);
+		if (palyer(sweep, mineSweep) == '0'){
+			break;
+		}
 		openedBlockCount++;
 		if (openedBlockCount == MAX_ROW * MAX_COL - DEGAULT_SWEEP) {
 			printf("游戏胜利!\n");
