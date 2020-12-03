@@ -95,6 +95,7 @@ void game(){
 	init(chessBoard);
 	char winner = ' ';
 	while (1){
+		system("cls");
 		print_chessBoard(chessBoard);
 		playerMove(chessBoard);
 		winner = isWin(chessBoard);
